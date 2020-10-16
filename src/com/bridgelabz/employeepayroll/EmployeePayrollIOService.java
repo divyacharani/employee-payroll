@@ -9,10 +9,9 @@ import java.util.List;
 
 public class EmployeePayrollIOService {
 
-	
 	public static String path = "C:\\Users\\DELL\\eclipse-workspace\\EmployeePayroll\\src\\com\\bridgelabz\\employeepayroll\\employee-payroll-file.txt";
 
-	//To write data to file
+	// To write data to file
 	public void writeData(List<EmployeePayrollData> employeePayrollList) {
 		StringBuffer empBuffer = new StringBuffer();
 		employeePayrollList.forEach(employee -> {
@@ -25,14 +24,25 @@ public class EmployeePayrollIOService {
 			e.printStackTrace();
 		}
 	}
-	
-	//To print data 
+
+	// To print data
 	public void printData() {
 		try {
 			Files.lines(Paths.get(path)).forEach(System.out::println);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	// To count entries
+	public long countEntries() {
+		long entries = 0;
+		try {
+			entries = Files.lines(Paths.get(path)).count();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return entries;
 	}
 
 }

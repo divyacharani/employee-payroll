@@ -49,8 +49,15 @@ public class EmployeePayrollService {
 	public void writeEmployeePayrollData(IO_SERVICE ioService) {
 		if (ioService.equals(IO_SERVICE.CONSOLE_IO))
 			System.out.println("Employee Payroll List: " + employeePayrollList);
-		else if(ioService.equals(IO_SERVICE.FILE_IO))
+		else if (ioService.equals(IO_SERVICE.FILE_IO))
 			new EmployeePayrollIOService().writeData(employeePayrollList);
+	}
+
+	// To print employee data
+	public void printData(IO_SERVICE ioService) {
+		if (ioService.equals(IO_SERVICE.FILE_IO)) {
+			new EmployeePayrollIOService().printData();
+		}
 	}
 
 }

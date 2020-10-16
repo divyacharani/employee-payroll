@@ -29,6 +29,7 @@ public class EmployeePayrollService {
 
 		employeePayrollService.readEmployeePayrollData(consoleInputReader);
 		employeePayrollService.writeEmployeePayrollData(IO_SERVICE.FILE_IO);
+		employeePayrollService.readPayrollData(IO_SERVICE.FILE_IO);
 
 	}
 
@@ -66,5 +67,12 @@ public class EmployeePayrollService {
 			return new EmployeePayrollIOService().countEntries();
 		}
 		return 0;
+	}
+
+	// To read employee data from file
+	public List<EmployeePayrollData> readPayrollData(IO_SERVICE ioService) {
+		if (ioService.equals(IO_SERVICE.FILE_IO))
+			this.employeePayrollList = new EmployeePayrollIOService().readData();
+		return employeePayrollList;
 	}
 }

@@ -7,7 +7,10 @@ import java.util.Scanner;
 public class EmployeePayrollService {
 
 	private List<EmployeePayrollData> employeePayrollList;
-	private Object writeEmployeePayrollData;
+
+	public enum IO_SERVICE {
+		CONSOLE_IO, FILE_IO
+	};
 
 	// Constructor
 	public EmployeePayrollService(List<EmployeePayrollData> employeePayrollList) {
@@ -25,12 +28,12 @@ public class EmployeePayrollService {
 		EmployeePayrollService employeePayrollService = new EmployeePayrollService(employeePayrollList);
 
 		employeePayrollService.readEmployeePayrollData(consoleInputReader);
-		employeePayrollService.writeEmployeePayrollData();
+		employeePayrollService.writeEmployeePayrollData(IO_SERVICE.FILE_IO);
 
 	}
 
 	// To read employee data
-	private void readEmployeePayrollData(Scanner consoleInputReader) {
+	public void readEmployeePayrollData(Scanner consoleInputReader) {
 
 		System.out.println("Enter Employee ID ");
 		int id = consoleInputReader.nextInt();
@@ -43,8 +46,11 @@ public class EmployeePayrollService {
 	}
 
 	// To write employee data
-	private void writeEmployeePayrollData() {
-		System.out.println("Employee Payroll List: "+employeePayrollList);
+	public void writeEmployeePayrollData(IO_SERVICE ioService) {
+		if (ioService.equals(IO_SERVICE.CONSOLE_IO))
+			System.out.println("Employee Payroll List: " + employeePayrollList);
+		else if(ioService.equals(IO_SERVICE.FILE_IO))
+			new EmployeePayrollIOService().writeData(employeePayrollList);
 	}
 
 }
